@@ -20,11 +20,11 @@
 
 
 </head>
-<body>
+<body ng-app="fullStack" ng-controller="masterController as vm" ng-init="vm.initializeController()">
 
     <div class="wrapper">
         <div class="content">
-            <div class="navbar navbar-inverse navbar-fixed-top">
+           <div class="navbar navbar-inverse navbar-fixed-top">
                 <div class="container">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -36,27 +36,27 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav" ng-cloak>
-                            <li>
+                            <li ng-show="vm.isAuth">
                                 <a href="/Search/Tickets/">Search</a>
                             </li>
-                            <li>
+                            <li ng-show="vm.isAuth && (vm.isOwner || vm.isCompanyAdmin)">
                                 <a href="/Customers/CustomerMaintenance/">Customer Maintenance</a>
                             </li>
-                            <li >
+                            <li ng-show="vm.isAuth && (vm.isOwner || vm.isCompanyAdmin || vm.isCustomerAdmin)">
                                 <a href="/User/UserMaintenance/">User Maintenance</a>
                             </li>
-                            <li >
+                            <li ng-show="vm.isAuth && (vm.isOwner || vm.isCompanyAdmin || vm.isCompanySearch)">
                                 <a href="/Report/Report/">Reports</a>
                             </li>
 
-                            <li >
+                            <li class="fr" ng-show="vm.isAuth">
                                 <a href="#" data-ng-click="vm.logOut()" class="logout">Log Out</a>
                             </li>
-                            <li>
-                                <span ></span>
+                            <li class="fr welcome" ng-show="vm.isAuth">
+                                <span ng-bind-template="Welcome,  {{vm.authData.user.fullName}} ({{vm.authData.user.organizationName}})" class=""></span>
                                 <span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;</span>
                             </li>
-                            <li>
+                            <li class="fr" ng-show="!vm.isAuth">
                                 <a href="/Account/Login/" class="login">Log In</a>
                             </li>
                         </ul>
@@ -64,10 +64,19 @@
                 </div>
             </div>
             <div class="container body-content">
+
                 @RenderBody()
             </div>
+            <footer>
+                <p class="centered">Copyright &copy; @DateTime.Now.Year Hope Construction Materials. <a href="~/Assets/Files/Terms-of-Use-Customer-Portal-25-May-2016.pdf" target="_blank">Terms & Conditions</a>
+                </p>
+
+            </footer>
         </div>
 
+        <script src="~/Views/Shared/MasterController.js"></script>
+        @*@Scripts.Render("~/bundles/shared")*@
+        @*@RenderSection("scripts", required: false)*@
     </div>
 
 

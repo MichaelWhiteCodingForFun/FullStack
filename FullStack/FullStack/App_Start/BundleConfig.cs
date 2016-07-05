@@ -22,7 +22,10 @@ namespace FullStack.App_Start
                 "~/Assets/styles/main.css", 
                 "~/Assets/lib/bootstrap/dist/css/bootstrap.css"));
 
-            BundleTable.EnableOptimizations = true;
+            bundles.Add(new ScriptBundle("~/bundles/shared").Include(
+                "~/Views/Shared/MasterController.js"));
+
+            BundleTable.EnableOptimizations = false;
         }
     }
 }
