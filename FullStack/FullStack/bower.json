@@ -1,0 +1,9 @@
+{
+	"name": "Full Stack",
+	"private": true,
+  "dependencies": {
+    "angular": "1.5.7",
+    "angular-block-ui": "~0.2.2",
+    "bootstrap": "3.3.6"
+  }
+}
